@@ -1,0 +1,16 @@
+.howToPlay {
+    background-color: #1E2732;
+    border-radius: 0.5em;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    margin: 2em 0;
+    max-width: 425px;
+}
+
+.text {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    text-align: left;
+}
