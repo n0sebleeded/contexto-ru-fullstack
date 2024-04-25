@@ -1,0 +1,43 @@
+.words-ans {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    min-height: 50px;
+}
+
+.row-wrapper {
+    border: 3px solid #fff;
+    font-weight: 800;
+    border-radius: 8px;
+    margin: 0 -3px;
+    overflow: hidden;
+    position: relative;
+}
+
+.outer-bar {
+    background-color: #1e2732;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+
+.inner-bar {
+    border-radius: 5px;
+    height: 100%;
+    min-width: 1%;
+}
+
+.row {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    font-weight: inherit;
+    height: 38px;
+    justify-content: space-between;
+    padding: 5px 10px;
+    position: relative;
+    width: 100%;
+}
