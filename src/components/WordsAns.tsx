@@ -5,9 +5,10 @@ import {Typography} from "@mui/material";
 interface IWordsAnsProps {
     word: string;
     value: number;
+    className?: string;
 }
 
-const WordsAns:React.FC<IWordsAnsProps> = ({word, value}) => {
+const WordsAns:React.FC<IWordsAnsProps> = ({word, value, className}) => {
     enum IColors {
         RED = "#f91880",
         ORANGE = "#ef7d31",
@@ -26,7 +27,7 @@ const WordsAns:React.FC<IWordsAnsProps> = ({word, value}) => {
 
     return (
         <div className="words-ans">
-            <div className="row-wrapper" id="wrapper">
+            <div className={"row-wrapper " + className} id="wrapper">
                 <div className="outer-bar">
                     <div className='inner-bar' style={{width: `${width}%`, backgroundColor: color}}></div>
                 </div>

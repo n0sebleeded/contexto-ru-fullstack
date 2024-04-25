@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import './components-style/word-form.css'
 import InfoBar from "./InfoBar.tsx";
+import {useDispatch} from "react-redux";
+import {addGuess, setGameState} from "../redux/reducers/gameStateSlice.ts";
 
 const WordsForm: React.FC = () => {
+    const dispatch = useDispatch();
     const [word, setWord] = useState("");
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -11,7 +14,8 @@ const WordsForm: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(word);
+        dispatch(setGameState({isStarted: true}));
+        dispatch(addGuess({key: word, value: Math.ceil(Math.random() * 100)}))
         // axios or other form submission logic can go here
     };
 
