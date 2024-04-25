@@ -6,7 +6,7 @@ const Header:React.FC = () => {
     return (
         <header className="header">
             <Container>
-                <Typography variant="h1">Контексто</Typography>
+                <Typography variant="h1" sx={{ textTransform: "uppercase", fontSize: "24px" }}>Контексто</Typography>
             </Container>
         </header>
     );

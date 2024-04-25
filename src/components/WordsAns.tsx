@@ -2,38 +2,40 @@ import React from 'react';
 import "./components-style/words-ans.css";
 import {Typography} from "@mui/material";
 
-const WordsAns:React.FC = () => {
-    //Axios request --> value
+interface IWordsAnsProps {
+    word: string;
+    value: number;
+}
 
+const WordsAns:React.FC<IWordsAnsProps> = ({word, value}) => {
     enum IColors {
         RED = "#f91880",
         ORANGE = "#ef7d31",
         GREEN = "#00ba7c",
     }
 
-    const val = 180;
-    let width = 0;
+    let width = value;
     let color = IColors.RED;
 
-    if (val > 3500) {
+    if (value > 3500) {
         width = 1;
     } else {
-        width = Math.exp(Math.log(100) - val/800); //important
-        width > 800 ? color = IColors.RED : width > 500 ? color = IColors.ORANGE : color = IColors.GREEN;
+        width = Math.exp(Math.log(100) - value/800); //important
+        value > 800 ? color = IColors.RED : value > 500 ? color = IColors.ORANGE : color = IColors.GREEN;
     }
 
     return (
         <div className="words-ans">
-            <div className="row-wrapper">
+            <div className="row-wrapper" id="wrapper">
                 <div className="outer-bar">
                     <div className='inner-bar' style={{width: `${width}%`, backgroundColor: color}}></div>
                 </div>
                 <div className="row">
                     <Typography variant="h4" sx={{textTransform: 'lowercase', fontSize: "18px"}}>
-                        Ящерица
+                        {word}
                     </Typography>
                     <Typography variant="h4" sx={{textTransform: 'lowercase', fontSize: "18px"}}>
-                        {val}
+                        {value}
                     </Typography>
                 </div>
             </div>

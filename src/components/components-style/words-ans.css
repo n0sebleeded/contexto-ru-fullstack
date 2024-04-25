@@ -8,12 +8,15 @@
 }
 
 .row-wrapper {
-    border: 3px solid #fff;
     font-weight: 800;
     border-radius: 8px;
     margin: 0 -3px;
     overflow: hidden;
     position: relative;
+}
+
+.current {
+    border: 3px solid #fff;
 }
 
 .outer-bar {

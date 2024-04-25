@@ -2,7 +2,7 @@ import Header from "./components/Header.tsx";
 import './App.css'
 import HowToPlay from "./components/HowToPlay.tsx";
 import WordsForm from "./components/WordsForm.tsx";
-import WordsAns from "./components/WordsAns.tsx";
+import WordsHistory from "./components/WordsHistory.tsx";
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
         <Header />
         <WordsForm />
         <HowToPlay />
-        <WordsAns />
+        <WordsHistory />
     </>
   )
 }
