@@ -1,0 +1,5 @@
+.info-bar {
+    display: flex;
+    padding: 0 10px;
+    margin-bottom: 10px;
+}

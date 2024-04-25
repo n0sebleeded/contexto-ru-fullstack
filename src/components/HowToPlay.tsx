@@ -1,6 +1,6 @@
 import React from 'react';
 import {Typography} from "@mui/material";
-import './components-style/how_to_play.css';
+import './components-style/how-to-play.css';
 
 const HowToPlay:React.FC = () => {
     return (

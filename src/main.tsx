@@ -29,6 +29,11 @@ export const theme = createTheme({
             fontSize: 18,
             margin: "0.5em 0"
         },
+        h4: {
+            fontSize: 12,
+            fontWeight: 600,
+            textTransform: 'uppercase',
+        }
     },
 });
 
