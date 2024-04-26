@@ -1,5 +1,5 @@
 import React, {ReactNode} from 'react';
-import {motion} from "framer-motion";
+import MotionDiv from "./MotionDiv.tsx";
 
 const popup = {
     initial: { scale: 0, transition: { duration: 0.5, type: 'spring' } },
@@ -13,14 +13,7 @@ interface IPopupProps {
 
 const Popup:React.FC<IPopupProps> = ({children}) => {
     return (
-        <motion.div
-            variants={popup}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-        >
-            {children}
-        </motion.div>
+        <MotionDiv variant={popup} children={children} />
     );
 };
 
