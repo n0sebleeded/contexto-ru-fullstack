@@ -4,11 +4,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface GameState {
     isStarted: boolean;
     guesses: { key: string; value: number }[];
+    lastGuess: { key: string; value: number };
 }
 
 const initialState: GameState = {
     isStarted: false,
     guesses: [],
+    lastGuess: { key: "", value: 0 },
 };
 
 // Создаем slice с именем burgerSlice с использованием createSlice из Redux Toolkit
@@ -22,6 +24,7 @@ const gameStateSlice = createSlice({
         addGuess(state, action: PayloadAction<{ key: string; value: number }>) {
             // Добавляем новое угадывание в массив угадываний
             state.guesses.push(action.payload);
+            state.lastGuess = action.payload;
         },
         clearGuesses(state) {
             state.guesses = [];

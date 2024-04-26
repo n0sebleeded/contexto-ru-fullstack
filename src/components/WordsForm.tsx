@@ -14,8 +14,11 @@ const WordsForm: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(setGameState({isStarted: true}));
-        dispatch(addGuess({key: word, value: Math.ceil(Math.random() * 100)}))
+        if (word.length) {
+            setWord("");
+            dispatch(setGameState({isStarted: true}));
+            dispatch(addGuess({key: word, value: Math.ceil(Math.random() * 100)}))
+        }
         // axios or other form submission logic can go here
     };
 

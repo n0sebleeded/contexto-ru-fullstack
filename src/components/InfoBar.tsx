@@ -1,8 +1,12 @@
 import React from 'react';
 import {Typography} from "@mui/material";
 import './components-style/info-bar.css'
+import {useSelector} from "react-redux";
+import {IRootStateGame} from "../redux/actions.ts";
 
 const InfoBar:React.FC = () => {
+    //axios get-method --> game num
+    const count = useSelector((state: IRootStateGame) => state.gameState.guesses).length
     return (
         <div className="info-bar">
             <Typography variant="h4" sx={{ display: "flex", alignItems: "end" }}>
@@ -16,7 +20,7 @@ const InfoBar:React.FC = () => {
                 GUESSES:&nbsp;
             </Typography>
             <Typography variant="h3" sx={{ fontWeight: 'bold', margin: 0 }}>
-                0&nbsp;&nbsp;
+                {count}&nbsp;&nbsp;
             </Typography>
         </div>
     );
