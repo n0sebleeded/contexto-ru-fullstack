@@ -13,6 +13,7 @@ const MotionDiv:React.FC<IMotionDivProps> = ({variant, children}) => {
             initial="initial"
             animate="animate"
             exit="exit"
+            style={{overflow: 'hidden'}}
         >
             {children}
         </motion.div>
