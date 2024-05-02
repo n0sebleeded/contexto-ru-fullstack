@@ -17,18 +17,22 @@ export const theme = createTheme({
         },
     },
     typography: {
-        fontFamily: 'Inter, system-ui, Avenir, Helvetica, Arial, sans-serif',
+        fontFamily: '"Nunito", sans-serif',
         h1: {
             fontSize: 32,
-            fontWeight: 'bold',
+            fontWeight: '900',
         },
         h2: {
-            fontSize: 24,
-            fontWeight: 'bold',
+            fontSize: 20,
+            lineHeight: '20px',
+            fontWeight: 800,
+            alignItems: 'baseline',
         },
         h3: {
-            fontSize: 18,
-            margin: "0.5em 0"
+            fontSize: 16,
+            fontWeight: 600,
+            marginTop: "10px",
+            lineHeight: 'normal'
         },
         h4: {
             fontSize: 12,

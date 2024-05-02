@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import './components-style/word-form.css'
 import InfoBar from "./InfoBar.tsx";
 import {useDispatch} from "react-redux";
-import {addGuess, setGameState} from "../redux/reducers/gameStateSlice.ts";
+import {addGuess, setGameState, toggleLoading} from "../redux/reducers/gameStateSlice.ts";
+import axios from "axios";
 
 const WordsForm: React.FC = () => {
+    const SERVER_PORT = import.meta.env.VITE_REACT_APP_SERVER_PORT;
+    const SERVER_IP = import.meta.env.VITE_REACT_APP_SERVER_IP;
+
     const dispatch = useDispatch();
     const [word, setWord] = useState("");
 
@@ -14,12 +18,19 @@ const WordsForm: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        dispatch(toggleLoading());
+
         if (word.length) {
             setWord("");
             dispatch(setGameState({isStarted: true}));
-            dispatch(addGuess({key: word, value: Math.ceil(Math.random() * 100)}))
+            axios.get(`${SERVER_IP}:${SERVER_PORT}/similarity/${word}`)
+                .then((response) => {
+                    dispatch(addGuess({key: word, value: response.data, isLoading: false}));
+                })
+                .catch((reason) => {
+                    console.log(reason);
+                })
         }
-        // axios or other form submission logic can go here
     };
 
     return (

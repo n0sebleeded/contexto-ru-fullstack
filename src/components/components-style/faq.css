@@ -1,0 +1,33 @@
+.FAQ {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    margin: 2em 0;
+    justify-content: start;
+}
+
+.text {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    text-align: left;
+}
+
+.arrow {
+    display: flex;
+    width: 25px;
+    height: 25px;
+    filter: invert(1);
+    cursor: pointer;
+}
+
+.question {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0
+}
+
+.sub-question {
+    display: flex;
+    justify-content: space-between;
+}
