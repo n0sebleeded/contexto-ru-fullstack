@@ -23,8 +23,9 @@ const WordsForm: React.FC = () => {
         if (word.length) {
             setWord("");
             dispatch(setGameState({isStarted: true}));
-            axios.get(`${SERVER_IP}:${SERVER_PORT}/similarity/${word}`)
+            axios.get(`${SERVER_IP}:${SERVER_PORT}/api/similarity?word=${word}`)
                 .then((response) => {
+                    console.log(response);
                     dispatch(addGuess({key: word, value: response.data, isLoading: false}));
                 })
                 .catch((reason) => {

@@ -1,5 +1,5 @@
-import '../../index.css'
-import { ClientOnly } from './client'
+import '../index.css'
+import { ClientOnly } from './client.tsx'
 
 export function generateStaticParams() {
     return [{ slug: [''] }]

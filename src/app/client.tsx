@@ -4,7 +4,7 @@ import React from 'react'
 import dynamic from 'next/dynamic'
 import {createTheme, ThemeProvider} from "@mui/material";
 import {Provider} from "react-redux";
-import store from "../../redux/store.ts";
+import store from "../redux/store.ts";
 
 export const theme = createTheme({
     palette: {
@@ -43,7 +43,7 @@ export const theme = createTheme({
     },
 });
 
-const App = dynamic(() => import('../../App'), { ssr: false })
+const App = dynamic(() => import('../App.tsx'), { ssr: false })
 
 export function ClientOnly() {
     return (
