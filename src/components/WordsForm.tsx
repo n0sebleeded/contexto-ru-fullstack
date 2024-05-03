@@ -6,8 +6,8 @@ import {addGuess, setGameState, toggleLoading} from "../redux/reducers/gameState
 import axios from "axios";
 
 const WordsForm: React.FC = () => {
-    const SERVER_PORT = import.meta.env.VITE_REACT_APP_SERVER_PORT;
-    const SERVER_IP = import.meta.env.VITE_REACT_APP_SERVER_IP;
+    const SERVER_PORT = process.env.NEXT_PUBLIC_REACT_APP_SERVER_IP;
+    const SERVER_IP = process.env.NEXT_PUBLIC_REACT_APP_SERVER_PORT;
 
     const dispatch = useDispatch();
     const [word, setWord] = useState("");
