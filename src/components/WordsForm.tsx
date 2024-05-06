@@ -6,8 +6,7 @@ import {addGuess, setGameState, toggleLoading} from "../redux/reducers/gameState
 import axios from "axios";
 
 const WordsForm: React.FC = () => {
-    const SERVER_PORT = process.env.NEXT_PUBLIC_REACT_APP_SERVER_IP;
-    const SERVER_IP = process.env.NEXT_PUBLIC_REACT_APP_SERVER_PORT;
+    const SERVER_URL = process.env.NEXT_PUBLIC_REACT_APP_SERVER_URL;
 
     const dispatch = useDispatch();
     const [word, setWord] = useState("");
@@ -23,7 +22,7 @@ const WordsForm: React.FC = () => {
         if (word.length) {
             setWord("");
             dispatch(setGameState({isStarted: true}));
-            axios.get(`http://localhost:3000/api/similarity?word=${word}`)
+            axios.get(`${SERVER_URL}/api/similarity?word=${word}`)
                 .then((response) => {
                     console.log(response);
                     dispatch(addGuess({key: word, value: response.data, isLoading: false}));

@@ -6,7 +6,6 @@ export async function GET(req: Request) {
 
     const { searchParams } = new URL(req.url);
     const word = searchParams.get("word");
-    console.log(word);
 
     try {
         const response = await pythonExec(path, word);
@@ -18,16 +17,15 @@ export async function GET(req: Request) {
 }
 
 export const pythonExec = async (path: string | undefined, word: string | null) => {
-    console.log("I am called");
     return new Promise((resolve, reject) => {
-        const pyprog = spawn('python', [`${path} ${word} ручка`], {shell: true});
+        const py = spawn('python', [`${path} ${word} ручка`], {shell: true});
 
-        pyprog.stdout.on('data', function(data) {
+        py.stdout.on('data', function(data) {
             console.log(data.toString());
             resolve(data.toString());
         });
 
-        pyprog.stderr.on('data', (data) => {
+        py.stderr.on('data', (data) => {
             console.log(data.toString());
             reject(data.toString());
         });
