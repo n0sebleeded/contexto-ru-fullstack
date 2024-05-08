@@ -3,5 +3,6 @@ export interface IRootStateGame {
         isStarted: boolean
         guesses: { key: string; value: number }[];
         lastGuess: {key: string; value: number, isLoading: boolean};
+        wordDoesNotExist: boolean;
     }
 }

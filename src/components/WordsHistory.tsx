@@ -9,6 +9,7 @@ import FadeInOut from "./motion-components/FadeInOut.tsx";
 import {AnimatePresence} from "framer-motion";
 
 const WordsHistory:React.FC = () => {
+    const wordDoesNotExist = useSelector((state: IRootStateGame) => state.gameState.wordDoesNotExist);
     const localStorage = useSelector((state: IRootStateGame) => state.gameState.guesses);
     const lastNode = useSelector((state:IRootStateGame) => state.gameState.lastGuess);
     const [, setCurrentWord] = useState({word: "", val: 0});
@@ -33,8 +34,10 @@ const WordsHistory:React.FC = () => {
                 <AnimatePresence mode="wait">
                     <FadeInOut key={uuidv4()}>
                         {!lastNode.isLoading
-                            ? <WordsAns className="current" word={lastNode.key} value={lastNode.value} />
-                            : <WaveText />
+                            ? wordDoesNotExist
+                                ? <WaveText text="Мы не знаем такого слова😔" />
+                                : <WordsAns className="current" word={lastNode.key} value={lastNode.value} />
+                            : <WaveText text="Рассчитываем..." />
                         }
                     </FadeInOut>
                 </AnimatePresence>
