@@ -5,12 +5,14 @@ interface GameState {
     isStarted: boolean;
     guesses: { key: string; value: number }[];
     lastGuess: { key: string; value: number, isLoading: boolean };
+    wordDoesNotExist: boolean;
 }
 
 const initialState: GameState = {
     isStarted: false,
     guesses: [],
     lastGuess: { key: "", value: 0, isLoading: false },
+    wordDoesNotExist: false,
 };
 
 
@@ -33,12 +35,15 @@ const gameStateSlice = createSlice({
         },
         toggleLoading(state) {
             state.lastGuess = {key: state.lastGuess.key, value: state.lastGuess.value, isLoading: !state.lastGuess.isLoading};
+        },
+        setWordExistence(state, action: PayloadAction<{ wordDoesNotExist: boolean }>) {
+            state.wordDoesNotExist = action.payload.wordDoesNotExist;
         }
     },
 });
 
 // Экспортируем экшены, сгенерированные createSlice
-export const { setGameState, addGuess, clearGuesses, toggleLoading } = gameStateSlice.actions;
+export const { setGameState, addGuess, clearGuesses, toggleLoading, setWordExistence } = gameStateSlice.actions;
 
 // Экспортируем функцию редюсера, сгенерированную createSlice
 export default gameStateSlice.reducer;

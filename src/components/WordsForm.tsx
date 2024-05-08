@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './components-style/word-form.css'
 import InfoBar from "./InfoBar.tsx";
 import {useDispatch} from "react-redux";
-import {addGuess, setGameState, toggleLoading} from "../redux/reducers/gameStateSlice.ts";
+import {addGuess, setGameState, toggleLoading, setWordExistence} from "../redux/reducers/gameStateSlice.ts";
 import axios from "axios";
 
 const WordsForm: React.FC = () => {
@@ -18,6 +18,7 @@ const WordsForm: React.FC = () => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(toggleLoading());
+        dispatch(setWordExistence({wordDoesNotExist: false}));
 
         if (word.length) {
             setWord("");
@@ -25,7 +26,12 @@ const WordsForm: React.FC = () => {
             axios.get(`${SERVER_URL}/api/similarity?word=${word}`)
                 .then((response) => {
                     console.log(response);
-                    dispatch(addGuess({key: word, value: response.data, isLoading: false}));
+                    if (!Number.isNaN(+response.data)) {
+                        dispatch(addGuess({key: word, value: +response.data, isLoading: false}));
+                    } else {
+                        dispatch(setWordExistence({wordDoesNotExist: true}));
+                        dispatch(toggleLoading());
+                    }
                 })
                 .catch((reason) => {
                     console.log(reason);
