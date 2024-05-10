@@ -15,7 +15,7 @@ dist-ssr
 .next
 next-env.d.ts
 dist
-src/app/api/similarity/script.py
+src/script.py
 
 
 # Editor directories and files

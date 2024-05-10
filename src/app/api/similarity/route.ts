@@ -16,7 +16,7 @@ export async function GET(req: Request) {
     }
 }
 
-export const pythonExec = async (path: string | undefined, word: string | null) => {
+const pythonExec = async (path: string | undefined, word: string | null) => {
     return new Promise((resolve, reject) => {
         const py = spawn('python', [`${path} ${word} ручка`], {shell: true});
 

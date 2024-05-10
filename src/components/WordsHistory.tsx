@@ -12,6 +12,9 @@ const WordsHistory:React.FC = () => {
     const wordDoesNotExist = useSelector((state: IRootStateGame) => state.gameState.wordDoesNotExist);
     const localStorage = useSelector((state: IRootStateGame) => state.gameState.guesses);
     const lastNode = useSelector((state:IRootStateGame) => state.gameState.lastGuess);
+    const hasError = useSelector((state: IRootStateGame) => state.gameState.wordLengthError);
+    const wordRepeat = useSelector((state : IRootStateGame) => state.gameState.wordRepeat);
+
     const [, setCurrentWord] = useState({word: "", val: 0});
 
     useEffect(() => {
@@ -28,17 +31,31 @@ const WordsHistory:React.FC = () => {
         });
     }, [localStorage]);
 
+    let component;
+    if (hasError) {
+        component = <WaveText text="Используйте только одно слово" />
+    } else {
+        if (wordRepeat) {
+            component = <WaveText text="Это слово уже было загадано" />
+        } else {
+            if (!lastNode.isLoading) {
+                if (wordDoesNotExist) {
+                    component = <WaveText text="Мы не знаем такого слова😔" />
+                } else {
+                    component = <WordsAns className="current" word={lastNode.key} value={lastNode.value} />
+                }
+            } else {
+                component = <WaveText text="Рассчитываем..." />
+            }
+        }
+    }
+
     return (
         <>
             <div className="message">
                 <AnimatePresence mode="wait">
                     <FadeInOut key={uuidv4()}>
-                        {!lastNode.isLoading
-                            ? wordDoesNotExist
-                                ? <WaveText text="Мы не знаем такого слова😔" />
-                                : <WordsAns className="current" word={lastNode.key} value={lastNode.value} />
-                            : <WaveText text="Рассчитываем..." />
-                        }
+                        {component}
                     </FadeInOut>
                 </AnimatePresence>
             </div>
