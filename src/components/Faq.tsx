@@ -25,7 +25,7 @@ const Faq:React.FC = () => {
             <div className="question" style={{ borderBottom: "1px solid white"}}>
                 <div className="sub-question">
                     <Typography variant="h3" className="text">
-                        How is the word order defined?
+                        Подробнее про navec.
                     </Typography>
                     <button onClick={(e) => onSubmit(e)}>
                         <Typography variant="h3" className="arrow">
@@ -38,7 +38,7 @@ const Faq:React.FC = () => {
                         <SlideIn key={uuidv4()}>
                             <FadeInOut key={uuidv4()}>
                                 <Typography variant="h3" className="text">
-                                    The game uses an artificial intelligence algorithm and thousands of texts to calculate the similarity of the words in relation to the word of the day. Not necessarily it is related to the meaning of the words, but to the proximity in which they are used on the internet. For example, if the word of the day were “infinite”, words related to “love” or words related to “universe” might be close to the word of the day because “infinite” is commonly used in those two different contexts. In similar reasoning, if “tv” and “television”, for example, are in very different positions, it means that they are used differently in relation to the word of the day, despite being the same object.
+                                    navec - это python библиотека для векторизации слов на русском языке. Она показывает более высокие результаты, чем RusVectores, загружается в 10 раз быстрее (~1 сек) и занимает в 10 раз меньше места (~50 МБ). С помощью неё был сделан python скрипт, сравнивающий насколько близко находится вектор секретного слова и слова, вводимого пользователем. Далее число проходит через функцию, которая приводит значения расстояния двух слов к более привычному виду.
                                 </Typography>
                             </FadeInOut>
                         </SlideIn>

@@ -16,7 +16,7 @@ dist-ssr
 next-env.d.ts
 dist
 src/script.py
-
+src/navec_hudlit_v1_12B_500K_300d_100q
 
 # Editor directories and files
 .vscode/*
@@ -28,3 +28,4 @@ src/script.py
 *.njsproj
 *.sln
 *.sw?
+.vercel

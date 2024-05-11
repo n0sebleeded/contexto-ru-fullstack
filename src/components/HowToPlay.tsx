@@ -9,21 +9,16 @@ const HowToPlay:React.FC = () => {
             <div className="howToPlay">
                 <Typography variant="h2" className="text" sx={{paddingBottom: '5px', alignItems: 'center'}}>
                     <img src="../../FAQ.svg" alt="FAQ" className="img"/>
-                    &nbsp;How to play
+                    &nbsp;Правила игры
                 </Typography>
                 <Typography variant="h3" className="text">
-                    Find the secret word. You have unlimited guesses.
+                    Найдите секретное слово. У вас есть неограниченное количество вариантов угадывания.
                 </Typography>
                 <Typography variant="h3" className="text">
-                    The words were sorted by an artificial intelligence algorithm according to how similar they were to
-                    the secret word.
+                    Числовое значение ассоциации двух слов происходит с помощью python библиотеки navec, ссылку на который вы можете найти в описании репозитория.
                 </Typography>
                 <Typography variant="h3" className="text">
-                    After submitting a word, you will see its position. The secret word is number 1.
-                </Typography>
-                <Typography variant="h3" className="text">
-                    The algorithm analyzed thousands of texts. It uses the context in which words are used to calculate
-                    the similarity between them.
+                    После ввода слова вы увидите его числовое значение ассоциации. Секретное слово имеет числовое значение равное 1.
                 </Typography>
             </div>
             <Faq/>
