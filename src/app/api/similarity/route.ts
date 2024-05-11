@@ -1,13 +1,14 @@
-import { NextResponse } from "next/server";
+import {NextRequest, NextResponse} from "next/server";
 import { spawn } from "node:child_process";
 
-export async function GET(req: Request) {
+export const dynamic = 'force-dynamic';
+export async function GET(req: NextRequest) {
     const path = process.env.NEXT_PUBLIC_SCRIPT_PATH;
 
-    const { searchParams } = new URL(req.url);
-    const word = searchParams.get("word");
-
     try {
+        const searchParams= req.nextUrl.searchParams;
+        const word = searchParams.get("word");
+        console.log(word);
         const response = await pythonExec(path, word);
         return NextResponse.json(response);
     } catch (error) {

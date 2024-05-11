@@ -43,7 +43,7 @@ export const theme = createTheme({
     },
 });
 
-const App = dynamic(() => import('../App.tsx'), { ssr: false })
+const App = dynamic(() => import('../App.tsx'), { ssr: true })
 
 export function ClientOnly() {
     return (
