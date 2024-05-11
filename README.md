@@ -59,6 +59,7 @@ export async function GET(req: NextRequest) {
         const word = searchParams.get("word");
 ``` 
 Gh-pages, in turn, only deploys static applications.
+
 2. Running the python script through the server cli. 
 It's simple, the kernel servers for deploying extjs applications do not have a python environment, therefore it is not possible to run the script.
 
@@ -149,6 +150,7 @@ export async function GET(req: NextRequest) {
         const word = searchParams.get("word");
 ``` 
 Gh-pages в свою очередь разворачивает только статические приложения.
+
 2. Запуск python скрипта через серверный cli. 
 Все просто, сервера vercel для разворачивания next js приложений не имеют python окружения, следовательно запустить скрипт не представляется возможным. 
 
