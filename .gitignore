@@ -29,3 +29,4 @@ src/navec_hudlit_v1_12B_500K_300d_100q
 *.sln
 *.sw?
 .vercel
+/src/navec_hudlit_v1_12B_500K_300d_100q/
