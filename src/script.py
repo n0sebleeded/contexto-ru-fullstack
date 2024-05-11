@@ -10,7 +10,7 @@ import sys
 path = "/home/nosebleed/Downloads/navec_hudlit_v1_12B_500K_300d_100q.tar"
 
 def y(x):
-    return np.exp(9 - 14 * x) * np.exp(6 * x) - 2.7
+    return np.exp(np.log(10000) - 9.21 * x)
 
 navec = Navec.load(path)
 

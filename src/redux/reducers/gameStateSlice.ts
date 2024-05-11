@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// Определяем начальное состояние интерфейса
 interface GameState {
     isStarted: boolean;
     guesses: { key: string; value: number }[];
@@ -8,6 +7,8 @@ interface GameState {
     wordDoesNotExist: boolean;
     wordLengthError: boolean;
     wordRepeat: boolean;
+    playerWin: boolean;
+    counter: { green: number, orange: number, red: number }
 }
 
 const initialState: GameState = {
@@ -17,10 +18,11 @@ const initialState: GameState = {
     wordDoesNotExist: false,
     wordLengthError: false,
     wordRepeat: false,
+    playerWin: false,
+    counter: { green: 0, orange: 0, red: 0 }
 };
 
 
-// Создаем slice с именем burgerSlice с использованием createSlice из Redux Toolkit
 const gameStateSlice = createSlice({
     name: 'gameState',
     initialState,
@@ -48,12 +50,22 @@ const gameStateSlice = createSlice({
         },
         setWordRepeat(state, action: PayloadAction<{ wordRepeat: boolean }>) {
             state.wordRepeat = action.payload.wordRepeat;
+        },
+        setPlayerWin(state, action: PayloadAction<{ playerWin: boolean }>) {
+            state.playerWin = action.payload.playerWin;
+        },
+        setCounter(state, action: PayloadAction<{counter: { green: number, orange: number, red: number }}>) {
+            state.counter = action.payload.counter;
         }
     },
 });
 
 // Экспортируем экшены, сгенерированные createSlice
-export const { setGameState, addGuess, clearGuesses, setLoading, setWordExistence, setError, setWordRepeat } = gameStateSlice.actions;
+export const { setGameState, addGuess,
+    clearGuesses, setLoading,
+    setWordExistence, setError,
+    setWordRepeat, setPlayerWin,
+    setCounter } = gameStateSlice.actions;
 
 // Экспортируем функцию редюсера, сгенерированную createSlice
 export default gameStateSlice.reducer;

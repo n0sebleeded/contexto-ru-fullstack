@@ -6,5 +6,7 @@ export interface IRootStateGame {
         wordDoesNotExist: boolean;
         wordLengthError: boolean;
         wordRepeat: boolean;
+        playerWin: boolean;
+        counter: { green: number, orange: number, red: number }
     }
 }

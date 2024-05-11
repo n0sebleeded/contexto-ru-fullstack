@@ -18,8 +18,10 @@ import {IRootStateGame} from "../redux/actions.ts";
 const WordsForm: React.FC = () => {
 	const guessList = useSelector((state : IRootStateGame) => state.gameState.guesses);
     const playerWin = useSelector((state: IRootStateGame) => state.gameState.playerWin)
-    const SERVER_URL = process.env.NEXT_PUBLIC_REACT_APP_SERVER_URL;
     const counterSelector = useSelector((state:IRootStateGame) => state.gameState.counter);
+    const lastGuess = useSelector((state: IRootStateGame) => state.gameState.lastGuess);
+
+    const SERVER_URL = process.env.NEXT_PUBLIC_REACT_APP_SERVER_URL;
 
     const dispatch = useDispatch();
     const [word, setWord] = useState("");
@@ -28,7 +30,6 @@ const WordsForm: React.FC = () => {
         setWord(e.target.value);
     };
 
-    //TODO: ??? REDUX BUG FIX
     const countColors = (val: number): void => {
         const temp = { red: 0, orange: 0, green: 0 };
 
@@ -47,6 +48,10 @@ const WordsForm: React.FC = () => {
 
 
     //TODO: FIX FREQ WIN POS!;
+    const handleNothingSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        return false;
+    }
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         let wordRepeat:boolean = false;
@@ -57,6 +62,7 @@ const WordsForm: React.FC = () => {
         if (word.length) {
             dispatch(setGameState({isStarted: true}));
             if (word == "ручка") {
+                countColors(1);
                 dispatch(setPlayerWin({playerWin: true}))
                 dispatch(addGuess({key: "ручка", value: 1, isLoading: false}));
                 return;
@@ -95,7 +101,7 @@ const WordsForm: React.FC = () => {
     return (
         <div className="word-form">
             <InfoBar />
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={lastGuess.isLoading ? handleNothingSubmit : handleSubmit}>
                 <input
                     type="text"
                     name="wordInput"

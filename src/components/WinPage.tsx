@@ -35,13 +35,19 @@ const WinPage:React.FC = () => {
                 <div className="chart">
                     {[...Array(colors.green)].map((_, index) => (
                         <span key={index}>{CSymbol.green}</span>
-                    ))}<br/>
+                    ))} {colors.green > 0 && colors.green}
+                    {colors.orange !== 0 &&
+                        <br />
+                    }
                     {[...Array(colors.orange)].map((_, index) => (
                         <span key={index}>{CSymbol.orange}</span>
-                    ))}<br/>
+                    ))} {colors.orange > 0 && colors.orange}
+                    {colors.red !== 0 &&
+                        <br />
+                    }
                     {[...Array(colors.red)].map((_, index) => (
                         <span key={index}>{CSymbol.red}</span>
-                    ))}
+                    ))} {colors.red > 0 && colors.red}
                 </div>
 
             </div>
