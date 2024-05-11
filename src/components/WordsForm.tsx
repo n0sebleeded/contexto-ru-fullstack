@@ -76,6 +76,7 @@ const WordsForm: React.FC = () => {
             if (!wordRepeat) {
                 if (word.includes(" ")) {
                     dispatch(setError({wordLengthError: true}));
+                    dispatch(setLoading({isLoading: false}));
                 } else {
                     setWord("");
                     axios.get(`${SERVER_URL}/api/similarity?word=${word}`)
