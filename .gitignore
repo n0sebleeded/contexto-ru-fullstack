@@ -12,6 +12,11 @@ node_modules
 dist
 dist-ssr
 *.local
+.next
+next-env.d.ts
+dist
+src/script.py
+src/navec_hudlit_v1_12B_500K_300d_100q
 
 # Editor directories and files
 .vscode/*
@@ -23,3 +28,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.vercel
+/src/navec_hudlit_v1_12B_500K_300d_100q/

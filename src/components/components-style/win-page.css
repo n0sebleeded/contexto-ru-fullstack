@@ -1,0 +1,50 @@
+.win {
+    background-color: #1E2732;
+    border-radius: 0.5em;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    margin: 0.5em 0;
+}
+
+.win-text, .win-text-bigger {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    text-align: left;
+}
+
+.win-text-bigger {
+    font-size: 20px;
+}
+
+.win-text {
+    font-size: 16px;
+}
+
+.chart-wrapper {
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.chart {
+    text-align: left;
+    white-space: pre;
+}
+
+.win-btn {
+    align-items: center;
+    background-color: #1d9bf0;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: inherit;
+    font-size: 18px;
+    justify-content: center;
+    line-height: 1;
+    padding: 15px 20px;
+    max-width: 60%;
+}

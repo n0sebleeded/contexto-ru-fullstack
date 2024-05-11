@@ -1,10 +1,28 @@
 import React, { useState } from 'react';
 import './components-style/word-form.css'
 import InfoBar from "./InfoBar.tsx";
-import {useDispatch} from "react-redux";
-import {addGuess, setGameState} from "../redux/reducers/gameStateSlice.ts";
+import {useDispatch, useSelector} from "react-redux";
+import {
+    addGuess,
+    setGameState,
+    setWordExistence,
+    setError,
+    setWordRepeat, setLoading, setPlayerWin, setCounter
+} from "../redux/reducers/gameStateSlice.ts";
+import axios from "axios";
+import {IRootStateGame} from "../redux/actions.ts";
+
+//TODO:temp solution
+//export const guessedWord = "ручка";
 
 const WordsForm: React.FC = () => {
+	const guessList = useSelector((state : IRootStateGame) => state.gameState.guesses);
+    const playerWin = useSelector((state: IRootStateGame) => state.gameState.playerWin)
+    const counterSelector = useSelector((state:IRootStateGame) => state.gameState.counter);
+    const lastGuess = useSelector((state: IRootStateGame) => state.gameState.lastGuess);
+
+    const SERVER_URL = process.env.NEXT_PUBLIC_REACT_APP_SERVER_URL;
+
     const dispatch = useDispatch();
     const [word, setWord] = useState("");
 
@@ -12,20 +30,79 @@ const WordsForm: React.FC = () => {
         setWord(e.target.value);
     };
 
+    const countColors = (val: number): void => {
+        const temp = { red: 0, orange: 0, green: 0 };
+
+        if (val > 800) temp.red++;
+        else if (val > 500) temp.orange++;
+        else temp.green++;
+
+        const newCounter = {
+            orange: counterSelector.orange + temp.orange,
+            green: counterSelector.green + temp.green,
+            red: counterSelector.red + temp.red,
+        };
+
+        dispatch(setCounter({ counter: newCounter }));
+    };
+
+
+    //TODO: FIX FREQ WIN POS!;
+    const handleNothingSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        return false;
+    }
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        let wordRepeat:boolean = false;
+        dispatch(setLoading({isLoading: true}));
+        dispatch(setWordExistence({wordDoesNotExist: false}));
+        dispatch(setError({wordLengthError: false}))
+
         if (word.length) {
-            setWord("");
             dispatch(setGameState({isStarted: true}));
-            dispatch(addGuess({key: word, value: Math.ceil(Math.random() * 100)}))
+            if (word == "ручка") {
+                countColors(1);
+                dispatch(setPlayerWin({playerWin: true}))
+                dispatch(addGuess({key: "ручка", value: 1, isLoading: false}));
+                return;
+            }
+            for (const item of guessList) {
+                if (item.key == word) {
+                    dispatch(setWordRepeat({wordRepeat: true}))
+                    wordRepeat = true;
+                }
+            }
+            if (!wordRepeat) {
+                if (word.includes(" ")) {
+                    dispatch(setError({wordLengthError: true}));
+                    dispatch(setLoading({isLoading: false}));
+                } else {
+                    setWord("");
+                    axios.get(`${SERVER_URL}/api/similarity?word=${word}`)
+                        .then((response) => {
+                            if (!Number.isNaN(+response.data)) {
+                                countColors(+response.data);
+                                dispatch(addGuess({key: word, value: +response.data, isLoading: false}));
+                                console.log(counterSelector);
+                            } else {
+                                dispatch(setWordExistence({wordDoesNotExist: true}));
+                            }
+                            dispatch(setError({wordLengthError: false}));
+                            dispatch(setLoading({isLoading: false}));
+                        })
+                        .catch((reason) => {
+                            console.log(reason);
+                        })
+                }
+            }
         }
-        // axios or other form submission logic can go here
     };
 
     return (
         <div className="word-form">
             <InfoBar />
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={lastGuess.isLoading ? handleNothingSubmit : handleSubmit}>
                 <input
                     type="text"
                     name="wordInput"
@@ -34,6 +111,7 @@ const WordsForm: React.FC = () => {
                     value={word}
                     onChange={handleChange}
                     className="word"
+                    disabled={playerWin}
                 />
             </form>
         </div>

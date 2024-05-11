@@ -12,7 +12,7 @@ const InfoBar:React.FC = () => {
             <Typography variant="h4" sx={{ display: "flex", alignItems: "end" }}>
                 GAME:&nbsp;
             </Typography>
-            <Typography variant="h3" sx={{ fontWeight: 'bold', margin: 0 }}>
+            <Typography variant="h3" sx={{ fontWeight: '800', fontSize: 18, margin: 0 }}>
                 #123&nbsp;&nbsp;
             </Typography>
 
