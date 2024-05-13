@@ -1,11 +1,10 @@
 import React from 'react';
 import {Typography} from "@mui/material";
-import './components-style/info-bar.css'
+import '../../components-style/info-bar.css'
 import {useSelector} from "react-redux";
-import {IRootStateGame} from "../redux/actions.ts";
+import {IRootStateGame} from "../../../shared/redux/actions.ts";
 
 const InfoBar:React.FC = () => {
-    //axios get-method --> game num
     const count = useSelector((state: IRootStateGame) => state.gameState.guesses).length
     return (
         <div className="info-bar">

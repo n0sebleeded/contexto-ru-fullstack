@@ -1,17 +1,20 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {IColor, IGuess} from "../actions.ts";
 
-interface GameState {
+export interface IGameState {
+    word: string,
     isStarted: boolean;
-    guesses: { key: string; value: number }[];
-    lastGuess: { key: string; value: number, isLoading: boolean };
+    guesses: IGuess[];
+    lastGuess: IGuess;
     wordDoesNotExist: boolean;
     wordLengthError: boolean;
     wordRepeat: boolean;
     playerWin: boolean;
-    counter: { green: number, orange: number, red: number }
+    counter: IColor
 }
 
-const initialState: GameState = {
+const initialState: IGameState = {
+    word: "",
     isStarted: false,
     guesses: [],
     lastGuess: { key: "", value: 0, isLoading: false },
@@ -27,6 +30,9 @@ const gameStateSlice = createSlice({
     name: 'gameState',
     initialState,
     reducers: {
+        setWord(state, action: PayloadAction<{ word: string }>) {
+            state.word = action.payload.word;
+        },
         setGameState(state, action: PayloadAction<{ isStarted: boolean }>) {
             state.isStarted = action.payload.isStarted;
         },
@@ -56,16 +62,30 @@ const gameStateSlice = createSlice({
         },
         setCounter(state, action: PayloadAction<{counter: { green: number, orange: number, red: number }}>) {
             state.counter = action.payload.counter;
-        }
+        },
+        countColors(state, action: PayloadAction<{val: number}>) {
+            const temp = { red: 0, orange: 0, green: 0 };
+
+            if (action.payload.val > 800) temp.red++;
+            else if (action.payload.val > 500) temp.orange++;
+            else temp.green++;
+
+            const newCounter = {
+                orange: state.counter.orange + temp.orange,
+                green: state.counter.green + temp.green,
+                red: state.counter.red + temp.red,
+            };
+
+            setCounter({ counter: newCounter });
+        },
     },
 });
 
 // Экспортируем экшены, сгенерированные createSlice
-export const { setGameState, addGuess,
-    clearGuesses, setLoading,
-    setWordExistence, setError,
-    setWordRepeat, setPlayerWin,
-    setCounter } = gameStateSlice.actions;
+export const { setGameState, addGuess, setWord,
+    setLoading, setWordExistence, setError,
+    setWordRepeat, setPlayerWin, setCounter,
+    countColors } = gameStateSlice.actions;
 
 // Экспортируем функцию редюсера, сгенерированную createSlice
 export default gameStateSlice.reducer;
