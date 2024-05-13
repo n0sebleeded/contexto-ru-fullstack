@@ -6,9 +6,10 @@ import WordsHistory from "./components/pages/words-history/WordsHistory.tsx";
 import {useSelector} from "react-redux";
 import {IRootStateGame} from "./shared/redux/actions.ts";
 import {AnimatePresence} from "framer-motion";
-import Popup from "./components/motion-components/Popup.tsx";
 import {v4 as uuidv4} from "uuid";
 import WinPage from "./components/pages/win/WinPage.tsx";
+import MotionDiv from "./components/motion-components/MotionDiv.tsx";
+import {popup} from "./components/motion-components/types-d.ts";
 
 function App() {
     const gameStarted = useSelector((state: IRootStateGame) => state.gameState.isStarted);
@@ -21,7 +22,7 @@ function App() {
                 <WordsForm />
             }
             <AnimatePresence mode="wait">
-                <Popup>
+                <MotionDiv variant={popup}>
                     {gameStarted
                         ? playerWin
                             ? <>
@@ -32,7 +33,7 @@ function App() {
                             : <WordsHistory key={uuidv4()}  />
                         : <HowToPlay key={uuidv4()} />
                     }
-                </Popup>
+                </MotionDiv>
             </AnimatePresence>
         </>
     )

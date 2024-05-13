@@ -3,11 +3,11 @@ import WordsAns from "./WordsAns.tsx";
 import { v4 as uuidv4 } from 'uuid';
 import {useSelector} from "react-redux";
 import {IGuess, IRootStateGame} from "../../../shared/redux/actions.ts";
-import Popup from "../../motion-components/Popup.tsx";
 import WaveText from "../../motion-components/WaveText.tsx";
-import FadeInOut from "../../motion-components/FadeInOut.tsx";
 import {AnimatePresence} from "framer-motion";
 import {IGameState} from "../../../shared/redux/reducers/gameStateSlice.ts";
+import MotionDiv from "../../motion-components/MotionDiv.tsx";
+import {fadeInOut, popup} from "../../motion-components/types-d.ts";
 
 const WordsHistory:React.FC = () => {
     const { wordDoesNotExist,
@@ -27,6 +27,7 @@ const WordsHistory:React.FC = () => {
 
             if (textWithoutNumbers == lastGuess.key) {
                 element.classList.add("current");
+                //TODO: hmmm
                 setCurrentWord({word: lastGuess.key, val: +lastGuess.value});
             }
         });
@@ -38,16 +39,16 @@ const WordsHistory:React.FC = () => {
         <>
             <div className="message">
                 <AnimatePresence mode="wait">
-                    <FadeInOut key={uuidv4()}>
+                    <MotionDiv variant={fadeInOut} key={uuidv4()}>
                         {component}
-                    </FadeInOut>
+                    </MotionDiv>
                 </AnimatePresence>
             </div>
                 {guesses.map(({key, value}) => (
                     key == lastGuess.key && !lastGuess.isLoading
-                        ? <Popup key={uuidv4()}>
+                        ? <MotionDiv variant={popup} key={uuidv4()}>
                             <WordsAns className="current" key={uuidv4()} word={key} value={value} />
-                          </Popup>
+                          </MotionDiv>
                         : <WordsAns key={uuidv4()} word={key} value={value} />
 
                 ))}

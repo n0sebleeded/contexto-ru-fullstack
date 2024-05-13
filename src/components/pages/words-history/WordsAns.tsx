@@ -1,20 +1,9 @@
 import React from 'react';
 import "../../components-style/words-ans.css";
 import {Typography} from "@mui/material";
-
-interface IWordsAnsProps {
-    word: string;
-    value: number;
-    className?: string;
-}
+import {IColors, IWordsAnsProps} from "./types-d.ts";
 
 const WordsAns:React.FC<IWordsAnsProps> = ({word, value, className}) => {
-    enum IColors {
-        RED = "#f91880",
-        ORANGE = "#ef7d31",
-        GREEN = "#00ba7c",
-    }
-
     let width = value;
     let color = IColors.RED;
 

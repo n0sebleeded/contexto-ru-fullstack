@@ -15,7 +15,7 @@ import {IRootStateGame} from "../../../shared/redux/actions.ts";
 
 const WordsForm: React.FC = () => {
     const {playerWin, lastGuess,
-        counter, guesses} = useSelector((state: IRootStateGame) => state.gameState)
+        counter, guesses, wordRepeat} = useSelector((state: IRootStateGame) => state.gameState)
 
     const SERVER_URL = process.env.NEXT_PUBLIC_REACT_APP_SERVER_URL;
 
@@ -42,15 +42,14 @@ const WordsForm: React.FC = () => {
         dispatch(setCounter({ counter: newCounter }));
     };
 
-
-    //TODO: FIX FREQ WIN POS!;
     const handleNothingSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         return false;
     }
+
+    //TODO: restucture
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        let wordRepeat:boolean = false;
         dispatch(setLoading({isLoading: true}));
         dispatch(setWordExistence({wordDoesNotExist: false}));
         dispatch(setError({wordLengthError: false}))
@@ -66,7 +65,6 @@ const WordsForm: React.FC = () => {
             for (const item of guesses) {
                 if (item.key == word) {
                     dispatch(setWordRepeat({wordRepeat: true}))
-                    wordRepeat = true;
                 }
             }
             if (!wordRepeat) {
@@ -75,25 +73,32 @@ const WordsForm: React.FC = () => {
                     dispatch(setLoading({isLoading: false}));
                 } else {
                     setWord("");
-                    axios.get(`${SERVER_URL}/api/similarity?word=${word}`)
-                        .then((response) => {
-                            if (!Number.isNaN(+response.data)) {
-                                countColors(+response.data);
-                                dispatch(addGuess({key: word, value: +response.data, isLoading: false}));
-                                console.log(counter);
-                            } else {
-                                dispatch(setWordExistence({wordDoesNotExist: true}));
-                            }
-                            dispatch(setError({wordLengthError: false}));
-                            dispatch(setLoading({isLoading: false}));
-                        })
-                        .catch((reason) => {
-                            console.log(reason);
-                        })
+                    ApiRequest();
                 }
             }
+        } else {
+            dispatch(setLoading({isLoading: false}));
+            dispatch(setWordExistence({wordDoesNotExist: false}));
+            dispatch(setError({wordLengthError: true}))
         }
     };
+
+    const ApiRequest = () => {
+        axios.get(`${SERVER_URL}/api/similarity?word=${word}`)
+            .then((response) => {
+                if (!Number.isNaN(+response.data)) {
+                    countColors(+response.data);
+                    dispatch(addGuess({key: word, value: +response.data, isLoading: false}));
+                } else {
+                    dispatch(setWordExistence({wordDoesNotExist: true}));
+                }
+                dispatch(setError({wordLengthError: false}));
+                dispatch(setLoading({isLoading: false}));
+            })
+            .catch((reason) => {
+                console.log(reason);
+            })
+    }
 
     return (
         <div className="word-form">
