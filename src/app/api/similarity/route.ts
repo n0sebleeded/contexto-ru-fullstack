@@ -8,7 +8,6 @@ export async function GET(req: NextRequest) {
     try {
         const searchParams= req.nextUrl.searchParams;
         const word = searchParams.get("word");
-        console.log(word);
         const response = await pythonExec(path, word);
         return NextResponse.json(response);
     } catch (error) {

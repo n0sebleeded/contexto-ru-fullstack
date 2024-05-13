@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {Typography} from "@mui/material";
-import './components-style/faq.css';
-import SlideIn from "./motion-components/SlideIn.tsx";
+import '../../components-style/faq.css';
+import SlideIn from "../../motion-components/SlideIn.tsx";
 import {AnimatePresence} from "framer-motion";
 import {v4 as uuidv4} from "uuid";
-import FadeInOut from "./motion-components/FadeInOut.tsx";
+import FadeInOut from "../../motion-components/FadeInOut.tsx";
 
 const Faq:React.FC = () => {
 

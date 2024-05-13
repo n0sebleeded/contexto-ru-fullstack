@@ -1,8 +1,8 @@
 import React from 'react';
 import {Typography} from "@mui/material";
-import '../components/components-style/win-page.css'
+import '../../components-style/win-page.css'
 import {useSelector} from "react-redux";
-import {IRootStateGame} from "../redux/actions.ts";
+import {IRootStateGame} from "../../../shared/redux/actions.ts";
 
 enum CSymbol {
     green = "🟩",
