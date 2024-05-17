@@ -1,6 +1,6 @@
 import React from 'react';
 import {Typography} from "@mui/material";
-import '../../components-style/info-bar.css'
+import './info-bar.css'
 import {useSelector} from "react-redux";
 import {IRootStateGame} from "../../../shared/redux/actions.ts";
 

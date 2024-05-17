@@ -6,7 +6,6 @@ import WordsHistory from "./components/pages/words-history/WordsHistory.tsx";
 import {useSelector} from "react-redux";
 import {IRootStateGame} from "./shared/redux/actions.ts";
 import {AnimatePresence} from "framer-motion";
-import {v4 as uuidv4} from "uuid";
 import WinPage from "./components/pages/win/WinPage.tsx";
 import MotionDiv from "./components/motion-components/MotionDiv.tsx";
 import {popup} from "./components/motion-components/types-d.ts";
@@ -18,25 +17,20 @@ function App() {
     return (
         <>
             <Header />
-            {!playerWin &&
-                <WordsForm />
+            {playerWin &&
+                <WinPage />
             }
             <AnimatePresence mode="wait">
                 <MotionDiv variant={popup}>
+                    <WordsForm />
                     {gameStarted
-                        ? playerWin
-                            ? <>
-                                <WinPage />
-                                <WordsForm />
-                                <WordsHistory key={uuidv4()}  />
-                              </>
-                            : <WordsHistory key={uuidv4()}  />
-                        : <HowToPlay key={uuidv4()} />
+                        ? <WordsHistory key="wordsHistory" />
+                        : <HowToPlay key="howToPlay" />
                     }
                 </MotionDiv>
             </AnimatePresence>
         </>
-    )
+    );
 }
 
-export default App
+export default App;

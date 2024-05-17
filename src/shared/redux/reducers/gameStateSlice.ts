@@ -41,9 +41,10 @@ const gameStateSlice = createSlice({
             state.guesses.push({key: action.payload.key, value: action.payload.value});
             state.lastGuess = action.payload;
             state.guesses.sort((a, b) => a.value - b.value);
-        },
-        clearGuesses(state) {
-            state.guesses = [];
+
+            if (action.payload.value == 1) {
+                state.playerWin = true;
+            }
         },
         setLoading(state, action: PayloadAction<{ isLoading: boolean }>) {
             state.lastGuess.isLoading = action.payload.isLoading;
@@ -56,9 +57,6 @@ const gameStateSlice = createSlice({
         },
         setWordRepeat(state, action: PayloadAction<{ wordRepeat: boolean }>) {
             state.wordRepeat = action.payload.wordRepeat;
-        },
-        setPlayerWin(state, action: PayloadAction<{ playerWin: boolean }>) {
-            state.playerWin = action.payload.playerWin;
         },
         setCounter(state, action: PayloadAction<{counter: { green: number, orange: number, red: number }}>) {
             state.counter = action.payload.counter;
@@ -84,7 +82,7 @@ const gameStateSlice = createSlice({
 // Экспортируем экшены, сгенерированные createSlice
 export const { setGameState, addGuess, setWord,
     setLoading, setWordExistence, setError,
-    setWordRepeat, setPlayerWin, setCounter,
+    setWordRepeat, setCounter,
     countColors } = gameStateSlice.actions;
 
 // Экспортируем функцию редюсера, сгенерированную createSlice

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../components-style/win-page.css'
+import './win-page.css'
 import {useSelector} from "react-redux";
 import {IRootStateGame} from "../../../shared/redux/actions.ts";
 import {CSymbol, IColor} from "./types-d.ts";

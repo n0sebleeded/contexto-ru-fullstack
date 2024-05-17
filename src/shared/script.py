@@ -16,18 +16,24 @@ navec = Navec.load(path)
 
 word1 = sys.argv[1].lower()
 word2 = sys.argv[2].lower()
+flag = True
 
-try:
-    a = navec[word1]
-    b = navec[word2]
+if (word1 == word2):
+    print(1)
+    flag = False
 
-    cosine = cosine_similarity(a.reshape(1, -1), b.reshape(1, -1))[0][0]
+if (flag):
+    try:
+        a = navec[word1]
+        b = navec[word2]
 
-    cosine = cosine if cosine >= 0 else 0
-    cosine = cosine if cosine < 0.76 or cosine == 1 else random.randint(3, 10)
-    print(math.ceil(y(cosine)))
-    sys.exit()
-except KeyError:
-    print("No word")
-except Exception as e:
-    print("An error occurred:", e)
+        cosine = cosine_similarity(a.reshape(1, -1), b.reshape(1, -1))[0][0]
+
+        cosine = cosine if cosine >= 0 else 0
+        cosine = cosine if cosine < 0.76 or cosine == 1 else random.randint(3, 10)
+        print(math.ceil(y(cosine)))
+        sys.exit()
+    except KeyError:
+        print("No word")
+    except Exception as e:
+        print("An error occurred:", e)

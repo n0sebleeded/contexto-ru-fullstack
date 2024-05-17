@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../components-style/word-form.css'
+import './word-form.css'
 import InfoBar from "./InfoBar.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import {
@@ -7,7 +7,7 @@ import {
     setGameState,
     setWordExistence,
     setError,
-    setWordRepeat, setLoading, setPlayerWin, setCounter
+    setWordRepeat, setLoading, setCounter
 } from "../../../shared/redux/reducers/gameStateSlice.ts";
 import axios from "axios";
 import {IRootStateGame} from "../../../shared/redux/actions.ts";
@@ -50,21 +50,17 @@ const WordsForm: React.FC = () => {
     //TODO: restucture
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
         dispatch(setLoading({isLoading: true}));
         dispatch(setWordExistence({wordDoesNotExist: false}));
         dispatch(setError({wordLengthError: false}))
 
         if (word.length) {
             dispatch(setGameState({isStarted: true}));
-            if (word == "ручка") {
-                countColors(1);
-                dispatch(setPlayerWin({playerWin: true}))
-                dispatch(addGuess({key: "ручка", value: 1, isLoading: false}));
-                return;
-            }
             for (const item of guesses) {
                 if (item.key == word) {
                     dispatch(setWordRepeat({wordRepeat: true}))
+                    return;
                 }
             }
             if (!wordRepeat) {
@@ -72,6 +68,7 @@ const WordsForm: React.FC = () => {
                     dispatch(setError({wordLengthError: true}));
                     dispatch(setLoading({isLoading: false}));
                 } else {
+                    //TODO: ?????
                     setWord("");
                     ApiRequest();
                 }

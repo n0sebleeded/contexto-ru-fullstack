@@ -1,5 +1,5 @@
 import React from 'react';
-import "../../components-style/words-ans.css";
+import "./words-ans.css";
 import { Typography } from "@mui/material";
 import { IColors, IWordsAnsProps } from "./types-d.ts";
 

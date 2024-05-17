@@ -1,6 +1,6 @@
 import React from 'react';
 import {Container, Typography} from "@mui/material";
-import '../../components-style/header.css'
+import './header.css'
 
 const Header:React.FC = () => {
     return (
