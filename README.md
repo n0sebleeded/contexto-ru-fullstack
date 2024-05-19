@@ -91,7 +91,7 @@ The functions is as close as possible to the originals one from contexto.me.
 - Axios
 - Next js(after migration)
 
-### Русское описание:
+### :sunglasses: Русское описание:
 Этот репозиторий представляет собой fullstack копию игры [contexto](https://contexto.me/) на русском языке.
 Стоит упомянуть о существовании отдельного репозитория [серверной части](https://github.com/sabexzero/contexto-ru-backend) игры, написанном на Java SpringBoot.
 Чтобы запустить проект следуйте следующим пунктам:
