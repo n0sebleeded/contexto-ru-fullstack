@@ -7,11 +7,12 @@
       "DOM",
       "DOM.Iterable"
     ],
-    "module": "ESNext",
+    "module": "esnext",
     "skipLibCheck": true,
     "esModuleInterop": true,
     /* Bundler mode */
     "moduleResolution": "bundler",
+    "baseUrl": "./",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
