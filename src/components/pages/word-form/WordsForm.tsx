@@ -100,7 +100,7 @@ const WordsForm: React.FC = () => {
     return (
         <div className="word-form">
             <InfoBar />
-            <form onSubmit={lastGuess.isLoading ? handleNothingSubmit : handleSubmit}>
+            <form onSubmit={lastGuess.isLoading ? handleNothingSubmit : handleSubmit} role="form">
                 <input
                     type="text"
                     name="wordInput"
