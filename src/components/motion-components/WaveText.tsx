@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import '../components-style/wave-text.css'
+import './wave-text.css'
 
 interface IWaveTextProps {
     text: string;

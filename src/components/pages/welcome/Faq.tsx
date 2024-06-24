@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Typography} from "@mui/material";
-import '../../components-style/faq.css';
+import './faq.css';
 import DropdownFaq from "./DropdownFaq.tsx";
 
 const Faq:React.FC = () => {
