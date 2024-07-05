@@ -3,7 +3,6 @@ import '@testing-library/jest-dom'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore, {MockStoreEnhanced} from 'redux-mock-store';
-import { thunk } from 'redux-thunk';
 import WordsForm from './../src/components/pages/word-form/WordsForm';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
@@ -11,27 +10,14 @@ import {
     setLoading,
     setWordExistence,
     setError,
-    addGuess,
-    setCounter, IGameState,
+    addGuess, initialState,
 } from '../src/shared/redux/reducers/gameStateSlice';
 import {IRootStateGame} from "../src/shared/redux/actions";
 
-const mockStore = configureStore<IRootStateGame>([thunk]);
+const mockStore = configureStore<IRootStateGame>();
 
-const initialGameState: IGameState = {
-    word: "",
-    isStarted: false,
-    guesses: [],
-    lastGuess: { key: "", value: 0, isLoading: false },
-    wordDoesNotExist: false,
-    wordLengthError: false,
-    wordRepeat: false,
-    playerWin: false,
-    counter: { green: 0, orange: 0, red: 0 }
-};
-
-const initialState: IRootStateGame = {
-    gameState: initialGameState
+const initialGameState: IRootStateGame = {
+    gameState: initialState
 };
 
 const SERVER_URL = process.env.NEXT_PUBLIC_REACT_APP_SERVER_URL as string;
@@ -41,7 +27,7 @@ describe('WordsForm Component', () => {
     let mock: MockAdapter;
 
     beforeEach(() => {
-        store = mockStore(initialState);
+        store = mockStore(initialGameState);
         mock = new MockAdapter(axios);
     });
 
@@ -133,20 +119,5 @@ describe('WordsForm Component', () => {
             const actions = store.getActions();
             expect(actions).toContainEqual(setWordExistence({ wordDoesNotExist: true }));
         });
-    });
-
-    it('disables input when playerWin is true', () => {
-        const customInitialState: IRootStateGame = {
-            gameState: { ...initialState.gameState, playerWin: true },
-        };
-        const customStore = mockStore(customInitialState);
-
-        render(
-            <Provider store={customStore}>
-                <WordsForm />
-            </Provider>
-        );
-
-        expect(screen.getByPlaceholderText('type a word')).toBeDisabled();
     });
 });

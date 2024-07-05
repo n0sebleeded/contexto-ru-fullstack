@@ -5,7 +5,7 @@ const WinPageButtons = () => {
     return (
         <>
             <div style={{display: 'flex', justifyContent: 'center'}}>
-                <button className="win-btn">
+                <button className="win-btn" role="button-share">
                     <div style={{width: '222px'}}>
                         Поделиться
                     </div>
@@ -17,7 +17,7 @@ const WinPageButtons = () => {
             </Typography>
 
             <div style={{display: 'flex', justifyContent: 'center'}}>
-                <button className="win-btn">
+                <button className="win-btn" role="button-prev-games">
                     Предыдущие игры
                 </button>
             </div>

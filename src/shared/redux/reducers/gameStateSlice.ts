@@ -13,7 +13,7 @@ export interface IGameState {
     counter: IColor
 }
 
-const initialState: IGameState = {
+export const initialState: IGameState = {
     word: "",
     isStarted: false,
     guesses: [],
