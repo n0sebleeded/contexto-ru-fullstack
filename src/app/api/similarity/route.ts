@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { spawn } from "node:child_process";
+//import {getDailyWord, getRandomWord, updateDailyWord} from "../../../db/queries.ts";
 
 export const dynamic = 'force-dynamic';
 export async function GET(req: NextRequest) {
@@ -31,3 +32,28 @@ const pythonExec = async (path: string | undefined, word: string | null) => {
         });
     });
 };
+
+//fix update-word
+/*
+const dailyWord = async () => {
+    // Проверка, существует ли уже слово на сегодня
+    const existingDailyWord = await getDailyWord();
+
+    if (existingDailyWord.length > 0) {
+        return existingDailyWord[0];
+    }
+
+    // Получение случайного слова из таблицы words
+    const randomWord = await getRandomWord()
+
+    if (randomWord.length > 0) {
+        await updateDailyWord({
+            id: 1,
+            date: new Date().toISOString(),
+            wordId: randomWord[0].id
+        });
+        return await getDailyWord();
+    }
+
+    throw new Error('Нет доступных слов для выбора');
+}*/

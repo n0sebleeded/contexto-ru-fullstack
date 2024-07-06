@@ -1,4 +1,3 @@
-import React from 'react';
 import '@testing-library/jest-dom'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
@@ -26,7 +25,7 @@ const initialGameState: IRootStateGame = {
 
 const mockStore = configureStore([]);
 let store: ReturnType<typeof mockStore>;
-let mock: MockAdapter;
+let mock: InstanceType<typeof MockAdapter>;
 const SERVER_URL = process.env.NEXT_PUBLIC_REACT_APP_SERVER_URL as string;
 
 describe('WinPage Component', () => {
