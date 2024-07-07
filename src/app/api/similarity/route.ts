@@ -73,18 +73,18 @@ const processWord: ProcessWordFunc = (
 const dailyWord = async () => {
     try {
         const existingDailyWord = await getDailyWord();
-        //console.log("Exist daily word: ", existingDailyWord);
-        if (existingDailyWord.length > 0) {
+        const date = new Date(existingDailyWord[0].date);
+        const currDate = new Date(Date.now());
+        if (date.getDate() === currDate.getDate() && date.getMonth() === currDate.getMonth()) {
             console.log("Existing daily word:", existingDailyWord[0]);
             return existingDailyWord[0];
         }
 
+        //need tests
         const randomWord = await getRandomWord();
-        //console.log("Random word: ", randomWord);
         if (randomWord.length > 0) {
             await updateDailyWord(randomWord[0].id);
             const result = await getDailyWord();
-            //console.log("New daily word:", result);
             return result[0];
         }
 
