@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './word-form.css'
 import InfoBar from "./InfoBar.tsx";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
     addGuess,
     setGameState,
@@ -10,7 +10,7 @@ import {
     setWordRepeat, setLoading, setCounter
 } from "../../../shared/redux/reducers/gameStateSlice.ts";
 import axios from "axios";
-import {IRootStateGame} from "../../../shared/redux/actions.ts";
+import { IRootStateGame } from "../../../shared/redux/actions.ts";
 
 
 const WordsForm: React.FC = () => {

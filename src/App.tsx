@@ -3,12 +3,12 @@ import './App.css'
 import HowToPlay from "./components/pages/welcome/HowToPlay.tsx";
 import WordsForm from "./components/pages/word-form/WordsForm.tsx";
 import WordsHistory from "./components/pages/words-history/WordsHistory.tsx";
-import {useSelector} from "react-redux";
-import {IRootStateGame} from "./shared/redux/actions.ts";
-import {AnimatePresence} from "framer-motion";
+import { useSelector } from "react-redux";
+import { IRootStateGame } from "./shared/redux/actions.ts";
+import { AnimatePresence } from "framer-motion";
 import WinPage from "./components/pages/win/WinPage.tsx";
 import MotionDiv from "./components/motion-components/MotionDiv.tsx";
-import {popup} from "./components/motion-components/types-d.ts";
+import { popup } from "./components/motion-components/vars.ts";
 
 function App() {
     const gameStarted = useSelector((state: IRootStateGame) => state.gameState.isStarted);

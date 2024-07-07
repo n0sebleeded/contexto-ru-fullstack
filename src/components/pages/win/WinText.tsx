@@ -1,8 +1,8 @@
 import React from 'react';
-import {Typography} from "@mui/material";
-import {IWinTextProp} from "./types-d.ts";
+import { Typography } from "@mui/material";
+import { WinTextProps } from "./@types.ts";
 
-const WinText:React.FC<IWinTextProp> = ({guesses}) => {
+const WinText:React.FC<WinTextProps> = ({guesses}) => {
     return (
         <>
             <Typography variant="h2" role='win-page-text-check' className="win-text-bigger" sx={{marginTop: '10px', paddingBottom: '5px', alignItems: 'center'}}>
