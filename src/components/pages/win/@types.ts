@@ -4,21 +4,15 @@ export enum CSymbol {
     red = "🟥",
 }
 
-export interface IColor {
+export type Color = {
     green: number,
     orange: number,
     red: number,
 }
-
-export interface IRenderColorSymbolsProps {
+export type RenderColorSymbolsProps = {
     color: number;
     symbol: string;
 }
-
-export interface IWinTextProp {
+export type WinTextProps = {
     guesses: number;
-}
-
-export interface IDropdownFaq {
-    isClicked: boolean
 }

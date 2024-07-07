@@ -1,12 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 import './wave-text.css'
+import { WaveTextProps } from "./@types.ts";
 
-interface IWaveTextProps {
-    text: string;
-}
-
-const WaveText:React.FC<IWaveTextProps> = ({text}) => {
+const WaveText:React.FC<WaveTextProps> = ({text}) => {
     return (
         <div className="wave-text">
             {Array.from(text).map((char, index) => (

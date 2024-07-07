@@ -1,12 +1,12 @@
 import React from 'react';
 import MotionDiv from "../../motion-components/MotionDiv.tsx";
-import {fadeInOut, slidein} from "../../motion-components/types-d.ts";
-import {v4 as uuidv4} from "uuid";
-import {Typography} from "@mui/material";
-import {AnimatePresence} from "framer-motion";
-import {IDropdownFaq} from "../win/types-d.ts";
+import { v4 as uuidv4 } from "uuid";
+import { Typography } from "@mui/material";
+import { AnimatePresence } from "framer-motion";
+import { DropdownFaqProps } from "./@types.ts";
+import { fadeInOut, slidein } from "../../motion-components/vars.ts";
 
-const DropdownFaq:React.FC<IDropdownFaq> = ({isClicked}) => {
+const DropdownFaq:React.FC<DropdownFaqProps> = ({isClicked}) => {
     return (
         <AnimatePresence mode="wait">
             {isClicked &&

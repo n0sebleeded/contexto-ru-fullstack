@@ -1,5 +1,5 @@
 import React from 'react';
-import {Typography} from "@mui/material";
+import { Typography } from "@mui/material";
 import './how-to-play.css';
 import Faq from "./Faq.tsx";
 

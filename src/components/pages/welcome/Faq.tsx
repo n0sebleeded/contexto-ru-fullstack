@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Typography} from "@mui/material";
+import React, { useState } from 'react';
+import { Typography } from "@mui/material";
 import './faq.css';
 import DropdownFaq from "./DropdownFaq.tsx";
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import "./words-ans.css";
 import { Typography } from "@mui/material";
-import { IColors, IWordsAnsProps } from "./types-d.ts";
+import { IColors, IWordsAnsProps } from "./@types.ts";
 
 const WordsAns: React.FC<IWordsAnsProps> = ({ word, value, className }) => {
     const { width, color } = calculateWidthAndColor(value);

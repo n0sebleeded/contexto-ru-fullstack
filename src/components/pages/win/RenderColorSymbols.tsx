@@ -1,7 +1,7 @@
 import React from 'react';
-import {IRenderColorSymbolsProps} from "./types-d.ts";
+import { RenderColorSymbolsProps } from "./@types.ts";
 
-const RenderColorSymbols:React.FC<IRenderColorSymbolsProps> = ({color, symbol}) => {
+const RenderColorSymbols:React.FC<RenderColorSymbolsProps> = ({color, symbol}) => {
     return (
         <>
             {[...Array(color)].map((_, index) => (

@@ -1,15 +1,15 @@
 import React from 'react';
 import './win-page.css'
-import {useSelector} from "react-redux";
-import {IRootStateGame} from "../../../shared/redux/actions.ts";
-import {CSymbol, IColor} from "./types-d.ts";
+import { useSelector } from "react-redux";
+import { IRootStateGame } from "../../../shared/redux/actions.ts";
+import { Color, CSymbol } from "./@types.ts";
 import RenderColorSymbols from "./RenderColorSymbols.tsx";
 import WinText from "./WinText.tsx";
 import WinPageButtons from "./WinPageButtons.tsx";
 
 const WinPage:React.FC = () => {
     const guesses = useSelector((state: IRootStateGame) => state.gameState.guesses.length);
-    const colors:IColor = useSelector((state:IRootStateGame) => state.gameState.counter);
+    const colors:Color = useSelector((state:IRootStateGame) => state.gameState.counter);
 
     return (
         <div className="win">

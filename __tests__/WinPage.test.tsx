@@ -7,7 +7,7 @@ import axios from 'axios';
 import WordsForm from "../src/components/pages/word-form/WordsForm";
 import WinPage from "../src/components/pages/win/WinPage";
 import {IRootStateGame} from "../src/shared/redux/actions";
-import {CSymbol} from "../src/components/pages/win/types-d";
+import {CSymbol} from "../src/components/pages/win/@types";
 
 const initialGameState: IRootStateGame = {
     gameState: {

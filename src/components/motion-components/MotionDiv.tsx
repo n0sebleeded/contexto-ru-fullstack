@@ -1,12 +1,8 @@
-import React, {ReactNode} from 'react';
-import {motion, Variants} from "framer-motion";
+import React from 'react';
+import { motion } from "framer-motion";
+import { MotionDivProps } from "./@types.ts";
 
-interface IMotionDivProps {
-    variant: Variants;
-    children: ReactNode;
-}
-
-const MotionDiv:React.FC<IMotionDivProps> = ({variant, children}) => {
+const MotionDiv:React.FC<MotionDivProps> = ({variant, children}) => {
     return (
         <motion.div
             variants={variant}

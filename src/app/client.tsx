@@ -2,8 +2,8 @@
 
 import React from 'react'
 import dynamic from 'next/dynamic'
-import {createTheme, ThemeProvider} from "@mui/material";
-import {Provider} from "react-redux";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { Provider } from "react-redux";
 import store from "../shared/redux/store.ts";
 
 export const theme = createTheme({

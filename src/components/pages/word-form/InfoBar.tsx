@@ -1,8 +1,8 @@
 import React from 'react';
-import {Typography} from "@mui/material";
+import { Typography } from "@mui/material";
 import './info-bar.css'
-import {useSelector} from "react-redux";
-import {IRootStateGame} from "../../../shared/redux/actions.ts";
+import { useSelector } from "react-redux";
+import { IRootStateGame } from "../../../shared/redux/actions.ts";
 
 const InfoBar:React.FC = () => {
     const count = useSelector((state: IRootStateGame) => state.gameState.guesses).length

@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import WordsAns from "./WordsAns.tsx";
 import { v4 as uuidv4 } from 'uuid';
-import {useSelector} from "react-redux";
-import {IGuess, IRootStateGame} from "../../../shared/redux/actions.ts";
+import { useSelector } from "react-redux";
+import { IGuess, IRootStateGame } from "../../../shared/redux/actions.ts";
 import WaveText from "../../motion-components/WaveText.tsx";
-import {AnimatePresence} from "framer-motion";
-import {IGameState} from "../../../shared/redux/reducers/gameStateSlice.ts";
+import { AnimatePresence } from "framer-motion";
+import { IGameState } from "../../../shared/redux/reducers/gameStateSlice.ts";
 import MotionDiv from "../../motion-components/MotionDiv.tsx";
-import {fadeInOut, popup} from "../../motion-components/types-d.ts";
+import { fadeInOut, popup } from "../../motion-components/vars.ts";
 
 const WordsHistory:React.FC = () => {
     const { wordDoesNotExist,

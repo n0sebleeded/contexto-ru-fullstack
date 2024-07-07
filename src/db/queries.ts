@@ -1,6 +1,6 @@
-import {eq, sql} from 'drizzle-orm';
-import {words, dailyWord} from './schema';
-import {db} from "./index.ts";
+import { eq, sql } from 'drizzle-orm';
+import { words, dailyWord } from './schema';
+import { db } from "./index.ts";
 
 export async function getRandomWord(): Promise<
     Array<{
