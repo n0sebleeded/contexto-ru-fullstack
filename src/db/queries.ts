@@ -1,4 +1,4 @@
-import { eq, sql } from 'drizzle-orm';
+import { asc, eq } from 'drizzle-orm';
 import { words, dailyWord } from './schema';
 import { db } from "./index.ts";
 
@@ -12,8 +12,7 @@ export async function getRandomWord(): Promise<
     return db
         .select()
         .from(words)
-        .orderBy(sql.raw("RANDOM()"))
-        .limit(1);
+        .orderBy(asc(words.id));
 }
 
 export async function getWordsById(id: number): Promise<
@@ -30,18 +29,32 @@ export async function getWordsById(id: number): Promise<
         .limit(1);
 }
 export async function getDailyWord(): Promise<
-    Array<{
+    {
         id: number;
-        wordId: number;
         date: string;
-    }>
+        wordId: number
+    } | undefined
 > {
+    const currDate = new Date(Date.now());
     return db
-        .select()
-        .from(dailyWord)
-        .limit(1);
+        .query
+        .dailyWord
+        .findFirst({
+        where: (table, func) => func.eq(table.date, `${currDate.getFullYear()}-${currDate.getMonth() + 1}-${currDate.getDate()}`)
+    });
 }
 
 export async function updateDailyWord(data: number) {
-    await db.update(dailyWord).set({wordId: data}).where(eq(dailyWord.id, 1));
+    const date = new Date(Date.now());
+    return db
+        .update(dailyWord)
+        .set({
+            wordId: data,
+            date: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`})
+        .where(eq(dailyWord.id, 1))
+        .returning({
+            id: dailyWord.id,
+            wordId: dailyWord.wordId,
+            date: dailyWord.date,
+        })
 }

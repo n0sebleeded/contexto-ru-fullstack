@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { spawn } from "node:child_process";
-import { getDailyWord, getRandomWord, getWordsById, updateDailyWord } from "../../../db/queries.ts";
+import { getRandomWord, getWordsById, updateDailyWord } from "../../../db/queries.ts";
 import { DailyWord, ProcessWordFunc, PythonExecFunc } from "./@types.ts";
 
 export const dynamic = 'force-dynamic';
 let cachedDailyWord: DailyWord | null = null;
+let playerWin = false;
 
 export async function GET(req: NextRequest) {
     const path = process.env.NEXT_PUBLIC_SCRIPT_PATH;
@@ -22,7 +23,9 @@ export async function GET(req: NextRequest) {
 
 const pythonExec: PythonExecFunc = async (path, wordInput) => {
     return new Promise((resolve, reject) => {
-        if (cachedDailyWord) {
+        //random word game mode cond.
+        //TODO: remove after rework game modes.
+        if (cachedDailyWord && !playerWin) {
             processWord(cachedDailyWord, path, wordInput, resolve, reject);
         } else {
             dailyWord().then((result) => {
@@ -56,7 +59,7 @@ const processWord: ProcessWordFunc = (
         }
         const dWord = word[0].word;
         const py = spawn('python', [`${path} ${wordInput} ${dWord}`], { shell: true });
-
+        wordInput === dWord ? playerWin = true : playerWin = false;
         py.stdout.on('data', function (data) {
             resolve(data.toString());
         });
@@ -72,23 +75,22 @@ const processWord: ProcessWordFunc = (
 
 const dailyWord = async () => {
     try {
-        const existingDailyWord = await getDailyWord();
-        const date = new Date(existingDailyWord[0].date);
-        const currDate = new Date(Date.now());
-        if (date.getDate() === currDate.getDate() && date.getMonth() === currDate.getMonth()) {
-            console.log("Existing daily word:", existingDailyWord[0]);
+        //FIXME: FIX SELECT!
+        /*const currDate = new Date(Date.now());
+        const existingDailyWord = await db.query.dailyWord.findMany();
+        console.log(existingDailyWord);
+        if (existingDailyWord) {
             return existingDailyWord[0];
-        }
+        }*/
 
-        //need tests
+        //random word(working game mode)
         const randomWord = await getRandomWord();
         if (randomWord.length > 0) {
-            await updateDailyWord(randomWord[0].id);
-            const result = await getDailyWord();
+            const randSeed = Math.floor(Math.random() * randomWord.length);
+            console.log(randomWord[randSeed]);
+            const result = await updateDailyWord(randomWord[randSeed].id);
             return result[0];
         }
-
-        throw new Error('Нет доступных слов для выбора');
     } catch (error) {
         console.error("Error in dailyWord function:", error);
         throw error;
